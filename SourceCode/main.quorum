@@ -1,0 +1,191 @@
+use Libraries.Game.Game
+use Libraries.Game.Graphics.Drawable
+use Libraries.Game.InputMonitor
+use Libraries.Interface.Events.KeyboardEvent
+use Libraries.Game.Graphics.Color
+/*
+    This is a default class for creating a game in Quorum. Note that the Main 
+    action begins by calling StartGame(), which loads a window a game can 
+    be displayed in. The action CreateGame is where the game should load any 
+    assets, like images to be displayed, frames of animation, or sounds to be
+    played. 
+*/
+
+class Main is Game
+    InputMonitor inputMonitor       // handles user input during game
+    KeyboardEvent keys              // helps determine which key is pressed
+
+    Drawable bunny                  // bunny image
+    number speed = 800
+    Drawable target
+    Drawable bunny2
+    Drawable bunny3
+    Drawable bunny4
+    Drawable bunny5
+    Drawable bunny6
+    Drawable bunny7
+    Drawable bunny8
+    Drawable bunny9
+    Drawable bunny10
+
+    /*
+        This action, Main, starts our computer program. In Quorum, programs always
+        begin from Main.
+    */
+
+    action Main
+    SetScreenSize(2000,2000)
+        StartGame()
+    end
+
+    /*
+        This action sets up the default values for a game. For example, we might
+        use the Libraries.Game.Graphics.Drawable class to load up an image or 
+        a shape. Or, we might add a Libraries.Interface.Button for making something clickable
+        or a Libraries.Interface.TextBox for gathering user input in a game.
+    */
+
+    action CreateGame
+    bunny:Load("bunny.png")
+    bunny2:Load("bunny.png")
+    bunny3:Load("bunny.png")
+    bunny4:Load("bunny.png")
+    bunny5:Load("bunny.png")
+    bunny6:Load("bunny.png")
+    bunny7:Load("bunny.png")
+    bunny8:Load("bunny.png")
+    bunny9:Load("bunny.png")
+    bunny10:Load("bunny.png")
+    Add(bunny)
+    target:LoadRectangle(100,100)
+    target:SetPosition(400,50)
+    target:SetColor(1,0,0,1)
+    Add(target)
+    say "get the bunny to the target to make 10 bunnies as fast as you can!"
+    
+   end
+
+    /*
+        The update action is called on every "frame" of animation in a game. This
+        action should be used to do operations on items. So, for example, we 
+        might use this action to change frames of animation, to rotate items, 
+        or to make creatures jump.
+    */
+
+    action Update(number seconds)
+    number targetnumber = bunny:GetX()
+    number targetnumber2 = bunny:GetY()
+    number bunnymakernumber2 = bunny2:GetX()
+     number bunnymakernumber3 = bunny3:GetX()
+      number bunnymakernumber4 = bunny4:GetX()
+       number bunnymakernumber5 = bunny5:GetX()
+        number bunnymakernumber6 = bunny6:GetX()
+         number bunnymakernumber7 = bunny7:GetX()
+          number bunnymakernumber8 = bunny8:GetX()
+           number bunnymakernumber9 = bunny9:GetX()
+            number bunnymakernumber10 = bunny10:GetX()
+    if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60
+    bunny2:SetPosition(1000,500)
+    Add(bunny2)
+    bunny:SetPosition(1000,1000)
+    output "Make Another One!"
+    end
+//
+  if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber2 = 1000
+    bunny3:SetPosition(1200,500)
+    Add(bunny3)
+    bunny:SetPosition(200,1000)
+    output "Keep going!"
+    end  
+
+    if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber3 = 1200
+    bunny4:SetPosition(1400,500)
+    Add(bunny4)
+    bunny:SetPosition(1000,200)
+    output "You are doing great!"
+    end  
+
+    if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber4 = 1400
+    bunny5:SetPosition(1600,500)
+    Add(bunny5)
+    bunny:SetPosition(200,200)
+    output "So many bunnies!"
+    end  
+
+    if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber5 = 1600
+    bunny6:SetPosition(1800,500)
+    Add(bunny6)
+    bunny:SetPosition(500,500)
+    output "3 or so left!"
+    end  
+
+    if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber6 = 1800
+    bunny7:SetPosition(1000,300)
+    Add(bunny7)
+    bunny:SetPosition(1000,1000)
+    output "Getting Closer!"
+    end  
+
+    if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber7 = 1000
+    bunny8:SetPosition(1200,300)
+    Add(bunny8)
+    bunny:SetPosition(1000,1000)
+    output "Almost There!"
+    end  
+
+    if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber8 = 1200
+    bunny9:SetPosition(1400,300)
+    Add(bunny9)
+    bunny:SetPosition(1000,1000)
+    output "Almost, Almost, there!"
+    end  
+
+      if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber9 = 1400
+    bunny10:SetPosition(1600,300)
+    Add(bunny10)
+    bunny:SetPosition(1800,300)
+    output "You won the game!"
+    end  
+
+     if targetnumber > 2000 or targetnumber <0 or targetnumber2 >2000 or targetnumber2 <0 
+    bunny:SetPosition(1000,300)
+    output "You ran off the screen!"
+    end
+ 
+    // if targetnumber > 400
+    //say "go left"
+    //end
+   
+   
+ 
+//
+    if inputMonitor:IsKeyPressed(keys:S)
+    number speed = 20
+    end
+    if inputMonitor:IsKeyPressed(keys:W)
+    number speed = 2000
+    end
+
+    if inputMonitor:IsKeyPressed(keys:UP)
+    number y = bunny:GetY()
+    number newy=y + speed * seconds
+    bunny:SetY(newy)
+    end
+     if inputMonitor:IsKeyPressed(keys:DOWN)
+    number y = bunny:GetY()
+    number newy=y - speed * seconds
+    bunny:SetY(newy)
+    end
+     if inputMonitor:IsKeyPressed(keys:RIGHT)
+    number x = bunny:GetX()
+    number newx=x + speed * seconds
+    bunny:SetX(newx)
+    end
+     if inputMonitor:IsKeyPressed(keys:LEFT)
+    number x = bunny:GetX()
+    number newx=x - speed * seconds
+    bunny:SetX(newx)
+    end
+  
+end
+end   
