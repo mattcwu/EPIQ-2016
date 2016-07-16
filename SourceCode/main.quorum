@@ -3,6 +3,12 @@ use Libraries.Game.Graphics.Drawable
 use Libraries.Game.InputMonitor
 use Libraries.Interface.Events.KeyboardEvent
 use Libraries.Game.Graphics.Color
+use Libraries.Sound.Speech
+use Libraries.Sound.Audio
+use Libraries.System.File
+use Libraries.Interface.Events.MouseEvent
+use Libraries.Game.Graphics.Label
+use Libraries.Compute.Random
 /*
     This is a default class for creating a game in Quorum. Note that the Main 
     action begins by calling StartGame(), which loads a window a game can 
@@ -14,7 +20,12 @@ use Libraries.Game.Graphics.Color
 class Main is Game
     InputMonitor inputMonitor       // handles user input during game
     KeyboardEvent keys              // helps determine which key is pressed
-
+    MouseEvent mouseButtons
+    //Audio:TooHighBlip
+   // TooHighBlip:Load("Sounds/Blip_Select.ogg")
+    Speech talk
+    Speech talk2
+    Speech talkoffthescreen
     Drawable bunny                  // bunny image
     number speed = 800
     Drawable target
@@ -27,7 +38,12 @@ class Main is Game
     Drawable bunny8
     Drawable bunny9
     Drawable bunny10
-
+    Drawable bunny11
+    Label label
+    Label label2
+    Random random
+    
+    
     /*
         This action, Main, starts our computer program. In Quorum, programs always
         begin from Main.
@@ -36,6 +52,9 @@ class Main is Game
     action Main
     SetScreenSize(2000,2000)
         StartGame()
+               
+
+          
     end
 
     /*
@@ -56,12 +75,24 @@ class Main is Game
     bunny8:Load("bunny.png")
     bunny9:Load("bunny.png")
     bunny10:Load("bunny.png")
+    bunny11:Load("bunny.png")
     Add(bunny)
     target:LoadRectangle(100,100)
-    target:SetPosition(400,50)
+    target:SetPosition(800,800)
     target:SetColor(1,0,0,1)
     Add(target)
-    say "get the bunny to the target to make 10 bunnies as fast as you can!"
+    talk:Say("get the bunny to the target to make 10 bunnies as fast as you can!")
+
+  
+            label:SetText("New High Score!")
+            label:SetPosition(787, 950)
+         
+   
+        label2:SetText("Your time:" + random:RandomIntegerBetween(0, 9) + " parsecs") 
+        label2:SetPosition(787,638)
+        label2:SetSize(250, 50)
+     
+    
     
    end
 
@@ -84,77 +115,88 @@ class Main is Game
           number bunnymakernumber8 = bunny8:GetX()
            number bunnymakernumber9 = bunny9:GetX()
             number bunnymakernumber10 = bunny10:GetX()
-    if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60
-    bunny2:SetPosition(1000,500)
+            number bunnymakernumber11 = bunny11:GetX()
+
+    if targetnumber > 700 and targetnumber < 900 and targetnumber2 > 700 and targetnumber2 < 900
+    bunny2:SetPosition(1000,900)
     Add(bunny2)
     bunny:SetPosition(1000,1000)
-    output "Make Another One!"
+    talk:Say ("Make Another One!")
     end
 //
-  if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber2 = 1000
-    bunny3:SetPosition(1200,500)
+  if targetnumber > 700 and targetnumber < 900 and targetnumber2 > 700 and targetnumber2 < 900 and bunnymakernumber2 = 1000
+    bunny3:SetPosition(1200,900)
     Add(bunny3)
     bunny:SetPosition(200,1000)
-    output "Keep going!"
+    talk:Say ("Keep going!")
     end  
 
-    if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber3 = 1200
-    bunny4:SetPosition(1400,500)
+    if targetnumber > 700 and targetnumber < 900 and targetnumber2 > 700 and targetnumber2 < 900 and bunnymakernumber3 = 1200 and bunnymakernumber4 not= 1400 
+    bunny4:SetPosition(1400,900)
     Add(bunny4)
-    bunny:SetPosition(1000,200)
-    output "You are doing great!"
+    bunny:SetPosition(1001,201)
+    talk:Say ("You're doing it")
     end  
 
-    if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber4 = 1400
-    bunny5:SetPosition(1600,500)
+    if targetnumber > 700 and targetnumber < 900 and targetnumber2 > 700 and targetnumber2 < 900 and bunnymakernumber4 = 1400 and bunnymakernumber5 not= 1600
+    bunny5:SetPosition(1600,900)
     Add(bunny5)
     bunny:SetPosition(200,200)
-    output "So many bunnies!"
+    talk2:Say ("So many bunnies!")
     end  
 
-    if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber5 = 1600
-    bunny6:SetPosition(1800,500)
+    if targetnumber > 700 and targetnumber < 900 and targetnumber2 > 700 and targetnumber2 < 900 and bunnymakernumber5 = 1600 and bunnymakernumber6 not= 1800
+    bunny6:SetPosition(1800,900)
     Add(bunny6)
-    bunny:SetPosition(500,500)
-    output "3 or so left!"
+    bunny:SetPosition(900,900)
+    talk2:Say ("3 or so left!")
     end  
 
-    if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber6 = 1800
+    if targetnumber > 700 and targetnumber < 900 and targetnumber2 > 700 and targetnumber2 < 900 and bunnymakernumber6 = 1800 and bunnymakernumber7 not= 1000
     bunny7:SetPosition(1000,300)
     Add(bunny7)
     bunny:SetPosition(1000,1000)
-    output "Getting Closer!"
+    talk2:Say ("Getting Closer!")
     end  
 
-    if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber7 = 1000
+    if targetnumber > 700 and targetnumber < 900 and targetnumber2 > 700 and targetnumber2 < 900 and bunnymakernumber7 = 1000 and bunnymakernumber8 not= 1200
     bunny8:SetPosition(1200,300)
     Add(bunny8)
     bunny:SetPosition(1000,1000)
-    output "Almost There!"
+    talk2:Say ("Almost There!")
     end  
 
-    if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber8 = 1200
+    if targetnumber > 700 and targetnumber < 900 and targetnumber2 > 700 and targetnumber2 < 900 and bunnymakernumber8 = 1200 and bunnymakernumber9 not= 1400
     bunny9:SetPosition(1400,300)
     Add(bunny9)
-    bunny:SetPosition(1000,1000)
-    output "Almost, Almost, there!"
+    bunny:SetPosition(900,1000)
+    talk2:Say("Almost, Almost, there!")
     end  
 
-      if targetnumber > 400 and targetnumber < 500 and targetnumber2 > 40 and targetnumber2 < 60 and bunnymakernumber9 = 1400
+          if targetnumber > 700 and targetnumber < 900 and targetnumber2 > 700 and targetnumber2 < 900 and bunnymakernumber9 = 1400 and bunnymakernumber10 not= 1600
     bunny10:SetPosition(1600,300)
     Add(bunny10)
-    bunny:SetPosition(1800,300)
-    output "You won the game!"
+    bunny:SetPosition(50,50)
+    talk2:Say ("Last one Hurry up!")
     end  
 
-     if targetnumber > 2000 or targetnumber <0 or targetnumber2 >2000 or targetnumber2 <0 
-    bunny:SetPosition(1000,300)
-    output "You ran off the screen!"
-    end
+      if targetnumber > 700 and targetnumber < 900 and targetnumber2 > 700 and targetnumber2 < 900 and bunnymakernumber10 = 1600 
+    bunny11:SetPosition(1800,300)
+    Add(bunny11)
+    bunny:SetPosition(1800,300)
+    talk2:Say ("You won the game!")
+    Add(label)
+    Add(label2)
+    
+    
+
+    end  
+
+
  
-    // if targetnumber > 400
-    //say "go left"
-    //end
+    //if targetnumber > 700
+    //
+  
    
    
  
@@ -187,5 +229,14 @@ class Main is Game
     bunny:SetX(newx)
     end
   
+//Find the mouse
+ if inputMonitor:IsMouseButtonPressed(mouseButtons:LEFT)
+                    output "The mouse X coordinate is at" + inputMonitor:GetMouseX()
+end
+
+ if inputMonitor:IsMouseButtonPressed(mouseButtons:LEFT)
+                    output "The mouse Y coordinate is at " + inputMonitor:GetMouseY()
+end
+/// jjjjkj
 end
 end   
